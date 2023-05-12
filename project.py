@@ -254,8 +254,8 @@ def _goRoom(command :Command):
     # nextRoom = currentRoom.getExit(direction).neighbor
     nextRoom = None
     exitToNextRoom = currentRoom.getExit(direction)
-    if exitToNextRoom:
-        nextRoom = exitToNextRoom.neighbor
+    if exitToNextRoom is None:
+        nextRoom = exitToNextRoom.neighboringRoom
 
     if nextRoom is None:
         print("There is no door!")

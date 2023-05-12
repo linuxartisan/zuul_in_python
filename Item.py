@@ -1,6 +1,6 @@
 
 class Item:
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str) -> None:
         if not name:
             raise ValueError("Missing name")
         if not description:
@@ -15,17 +15,17 @@ class Item:
 
 
     @property
-    def name(self):
+    def name(self) -> str:
         return self._name
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str) -> None:
         self._name = name
 
     @property
-    def description(self):
+    def description(self) -> str:
         return self._description
 
     @description.setter
-    def description(self, description):
+    def description(self, description: str) -> None:
         self._description = description
