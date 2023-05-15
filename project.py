@@ -148,6 +148,7 @@ def play():
         try:
             command = parser.getCommand()
             finished = processCommand(command)
+            _printRemainingTurns()
         except BaseException as ex:
             print(ex)
 
@@ -414,6 +415,9 @@ def _quit(command):
     else:
         return True  # signal that we want to quit
 
+
+def _printRemainingTurns():
+    print("Turns left:", TIMELIMIT - len(backtrack))
 
 if __name__ == "__main__":
     main()
