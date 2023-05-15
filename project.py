@@ -12,9 +12,9 @@ TIMELIMIT = 20
 MAXITEMCAPACITY = 5
 
 # global vars
-parser :Parser = Parser()
-currentRoom :Room = None
-finalRoom :Room = None
+parser: Parser = Parser()
+currentRoom: Room = None
+finalRoom: Room = None
 itemsWithPlayer = []
 backtrack = []
 
@@ -166,7 +166,7 @@ def processCommand(command):
         _printHelp()
 
     elif commandWord == "go":
-        _goRoom(command)
+        goRoom(command)
 
     elif commandWord == "quit":
         wantToQuit = _quit(command)
@@ -188,9 +188,9 @@ def processCommand(command):
 
     # else command not recognised.
 
-    checkWinningCondition()
+    game_won = checkWinningCondition()
 
-    return wantToQuit
+    return wantToQuit or game_won
 
 
 def checkWinningCondition():
@@ -203,15 +203,17 @@ def checkWinningCondition():
 
     if item1 and item2:
         print("Congrats! You have won the game.")
+        return True
 
+    return False
 
 # Helper functions
 def _printWelcome():
     # global currentRoom
 
     print()
-    print("Welcome to the World of Zuul!")
-    print("World of Zuul is a new, mildly interesting adventure game.")
+    print("Welcome to the World of Triage!")
+    print("World of Triage is a new, mildly interesting adventure game.")
     print("Type 'help' if you need help.")
     print()
     print(currentRoom)
@@ -233,7 +235,7 @@ def _printHelp():
     print(currentRoom)
 
 
-def _goRoom(command :Command):
+def goRoom(command :Command):
     global currentRoom
     global finalRoom
     global backtrack
@@ -254,7 +256,7 @@ def _goRoom(command :Command):
     # nextRoom = currentRoom.getExit(direction).neighbor
     nextRoom = None
     exitToNextRoom = currentRoom.getExit(direction)
-    if exitToNextRoom is None:
+    if exitToNextRoom is not None:
         nextRoom = exitToNextRoom.neighboringRoom
 
     if nextRoom is None:

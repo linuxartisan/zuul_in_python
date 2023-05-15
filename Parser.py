@@ -3,8 +3,9 @@ from Command import Command
 from CommandWords import CommandWords
 
 class Parser:
-    def getCommand(self):
-        inputLine = input("> ")
+    def getCommand(self, inputLine = None):
+        if inputLine is None or len(inputLine) == 0:
+            inputLine = input("> ")
 
         result = re.split(r"\s", inputLine, maxsplit=2)
         word1 = None
